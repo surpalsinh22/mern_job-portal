@@ -16,9 +16,12 @@ const app = express();
 app.use(express.json());
 
 app.use(cookieParser());
-
 app.use(cors({
-  origin: "https://mern-job-portal-xi.vercel.app",
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://mern-job-portal-xi.vercel.app"
+  ],
   credentials: true
 }));
 // routes
