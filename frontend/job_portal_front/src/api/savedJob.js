@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:5000/api/saved";
+import { API_BASE_URL } from "./config";
+
+const BASE_URL = `${API_BASE_URL}/api/saved`;
 
 // SAVE JOB
 export const saveJobApi = async (jobId) => {
@@ -14,7 +16,7 @@ export const saveJobApi = async (jobId) => {
 
 // GET SAVED JOBS
 export const getSavedJobs = async () => {
-  const res = await fetch(`${BASE_URL}`, {
+  const res = await fetch(BASE_URL, {
     method: "GET",
     credentials: "include",
   });

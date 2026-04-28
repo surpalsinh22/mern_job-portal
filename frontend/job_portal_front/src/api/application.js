@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:5000/api/applications";
+import { API_BASE_URL } from "./config";
+
+const BASE_URL = `${API_BASE_URL}/api/applications`;
 
 // APPLY JOB
 export const applyJobApi = async (data) => {
