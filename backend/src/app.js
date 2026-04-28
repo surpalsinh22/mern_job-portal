@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(cors({
-  origin: "https://your-vercel-app.vercel.app",
+  origin: "https://mern-job-portal-xi.vercel.app",
   credentials: true
 }));
 // routes
