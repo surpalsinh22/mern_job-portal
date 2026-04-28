@@ -6,8 +6,8 @@ const generateToken = require("../utils/generateToken");
 // helper: cookie options
 const cookieOptions = {
   httpOnly: true,
-  secure: true, 
-  sameSite: "lax"
+  secure: true,
+  sameSite: "none"
 };
 
 // SIGNUP
