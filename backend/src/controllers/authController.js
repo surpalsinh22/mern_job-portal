@@ -133,11 +133,11 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
 
-// helper: cookie options
 const cookieOptions = {
   httpOnly: true,
-  secure: true,
-  sameSite: "none"
+  secure: true,      // Render = HTTPS
+  sameSite: "none",  // Vercel ↔ Render
+  path: "/"
 };
 
 // SIGNUP

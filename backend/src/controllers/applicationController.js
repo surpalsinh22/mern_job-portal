@@ -138,6 +138,10 @@ const sendEmail = require("../utils/sendEmail");
 ========================= */
 exports.applyJob = async (req, res) => {
   try {
+
+    console.log("USER:", req.user);
+console.log("BODY:", req.body);
+
     const userId = req.user.id;
     const { jobId, fullName, email, phone, experience, resume } = req.body;
 

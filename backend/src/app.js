@@ -36,39 +36,23 @@ const savedJobRoutes = require("./routes/savedJobRoutes");
 
 const app = express();
 
-// ✅ ORDER IMPORTANT
 app.use(express.json());
 app.use(cookieParser());
 
-// // ✅ CORS FIX (FINAL)
-// app.use(cors({
-//   origin: [
-//     "http://localhost:5176",
-//     "http://localhost:5173",
-//     "https://mern-job-portal-xi.vercel.app"
-//   ],
-//   credentials: true
-// }));
-const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5176",
-  "https://mern-job-portal-xi.vercel.app"
-];
+// 🔥 IMPORTANT FOR RENDER COOKIE ISSUES
+app.set("trust proxy", 1);
 
+// 🌐 ALLOWED FRONTEND ORIGINS
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // mobile/postman support
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    } else {
-      return callback(new Error("Not allowed by CORS: " + origin));
-    }
-  },
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5177",
+    "https://your-vercel-app.vercel.app"
+  ],
   credentials: true
 }));
 
-// routes
+// ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
