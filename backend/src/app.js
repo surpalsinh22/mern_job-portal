@@ -49,8 +49,22 @@ app.use(cookieParser());
 //   ],
 //   credentials: true
 // }));
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5176",
+  "https://mern-job-portal-xi.vercel.app"
+];
+
 app.use(cors({
-  origin: true,
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // mobile/postman support
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error("Not allowed by CORS: " + origin));
+    }
+  },
   credentials: true
 }));
 
