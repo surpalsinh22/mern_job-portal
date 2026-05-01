@@ -5,10 +5,11 @@ const generateToken = require("../utils/generateToken");
 
 const cookieOptions = {
   httpOnly: true,
-  secure: false,   
-  sameSite: "lax",
+  secure: true,        // REQUIRED for Render (HTTPS)
+  sameSite: "none",    // REQUIRED for Vercel + Render
   path: "/"
 };
+
 // SIGNUP
 exports.signup = async (req, res) => {
   try {
@@ -32,16 +33,7 @@ exports.signup = async (req, res) => {
 
     res.cookie("token", token, cookieOptions);
 
-    // res.status(201).json({
-    //   msg: "User created successfully",
-    //   user: {
-    //     id: user._id,
-    //     name: user.name,
-    //     email: user.email,
-    //     role: user.role
-    //   }
-    // });
-    res.status(201).json({
+res.status(201).json({
   success: true,
   msg: "User created successfully",
   user: {
@@ -76,15 +68,10 @@ exports.login = async (req, res) => {
 
     const token = generateToken(user);
 
-    // cookie set correctly
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: false,     
-      sameSite: "lax",
-      path: "/"
-    });
+    res.cookie("token", token, cookieOptions);
 
     return res.json({
+      success: true,
       msg: "Login successful",
       user: {
         id: user._id,
@@ -98,16 +85,16 @@ exports.login = async (req, res) => {
     return res.status(500).json({ msg: err.message });
   }
 };
-
 // LOGOUT
 exports.logout = (req, res) => {
- res.clearCookie("token", {
+res.clearCookie("token", {
   httpOnly: true,
   secure: true,
   sameSite: "none",
   path: "/"
 });
-  res.json({ msg: "Logged out successfully" });
+
+res.json({ msg: "Logged out successfully" });
 };
 
 exports.getMe = async (req, res) => {

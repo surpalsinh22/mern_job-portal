@@ -35,14 +35,13 @@ const handleSubmit = async (e) => {
     if (res.success) {
       alert(res.msg);
 
-      await loadUser();  
+      await loadUser();
       navigate("/");
-
     } else {
       alert(res.msg);
     }
   } catch (err) {
-    alert("Something went wrong");
+    alert("Server error");
   }
 };
 
