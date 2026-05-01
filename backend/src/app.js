@@ -12,13 +12,11 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// SIMPLE CORS FIX
+// CORS FIX
 app.use(cors({
-  origin: true,
+  origin: "https://mern-job-portal-xi.vercel.app",
   credentials: true
 }));
-
-app.options("*", cors());
 
 // routes
 app.use("/api/auth", authRoutes);
