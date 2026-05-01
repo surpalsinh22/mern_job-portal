@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 
 // pages
@@ -17,8 +18,9 @@ export default function App() {
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50">
 
-        {/* NAVBAR (always visible) */}
+        {/* NAVBAR*/}
         <Navbar />
+        <Toaster />
 
         {/* ROUTES */}
         <Routes>

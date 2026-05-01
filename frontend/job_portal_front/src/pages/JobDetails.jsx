@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { getJobById } from "../api/job";
 import { AuthContext } from "../context/AuthContext";
 import { saveJobApi } from "../api/savedJob";
+import toast from "react-hot-toast";
 
 import {
   FaMapMarkerAlt,
@@ -39,8 +40,7 @@ export default function JobDetails() {
     }
 
     const res = await saveJobApi(job._id);
-    alert(res.msg);
-  };
+toast.success(res.msg);  };
 
   // job fetch karna
   useEffect(() => {

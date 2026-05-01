@@ -1,4 +1,5 @@
 const Application = require("../models/Application");
+const sendEmail = require("../utils/sendEmail");
 
 // APPLY JOB (USER)
 exports.applyJob = async (req, res) => {
@@ -11,12 +12,14 @@ exports.applyJob = async (req, res) => {
       return res.status(400).json({ msg: "Missing required fields" });
     }
 
+    // check already applied
     const exists = await Application.findOne({ userId, jobId });
 
     if (exists) {
       return res.status(400).json({ msg: "Already applied" });
     }
 
+    // create application
     const application = await Application.create({
       userId,
       jobId,
@@ -28,12 +31,32 @@ exports.applyJob = async (req, res) => {
       status: "pending"
     });
 
-    res.status(201).json({ msg: "Applied successfully", application });
+    // 🔥 SEND EMAIL (apply)
+    await sendEmail(
+      email,
+      "Job Application Submitted",
+      `Hello ${fullName},
+
+You have successfully applied for this job.
+
+Status: Pending
+
+We will notify you once your application is reviewed.
+
+- Team`
+    );
+
+    res.status(201).json({
+      msg: "Applied successfully",
+      application
+    });
 
   } catch (err) {
+    console.log("Apply Error:", err.message);
     res.status(500).json({ msg: err.message });
   }
 };
+
 
 // GET USER APPLICATIONS
 exports.getUserApplications = async (req, res) => {
@@ -44,11 +67,13 @@ exports.getUserApplications = async (req, res) => {
 
     res.status(200).json(apps);
   } catch (err) {
+    console.log("Get User Apps Error:", err.message);
     res.status(500).json({ msg: err.message });
   }
 };
 
-// ADMIN - GET ALL
+
+// ADMIN - GET ALL APPLICATIONS
 exports.getAllApplications = async (req, res) => {
   try {
     const apps = await Application.find()
@@ -57,9 +82,12 @@ exports.getAllApplications = async (req, res) => {
 
     res.status(200).json(apps);
   } catch (err) {
+    console.log("Get All Apps Error:", err.message);
     res.status(500).json({ msg: err.message });
   }
 };
+
+
 // UPDATE STATUS (ADMIN)
 exports.updateStatus = async (req, res) => {
   try {
@@ -79,9 +107,26 @@ exports.updateStatus = async (req, res) => {
       return res.status(404).json({ msg: "Application not found" });
     }
 
-    res.json({ msg: "Updated", application: app });
+    // 🔥 SEND EMAIL (status update)
+    await sendEmail(
+      app.email,
+      "Application Status Update",
+      `Hello ${app.fullName},
+
+Your application status has been updated.
+
+New Status: ${status.toUpperCase()}
+
+- Team`
+    );
+
+    res.json({
+      msg: "Status updated",
+      application: app
+    });
 
   } catch (err) {
+    console.log("Update Status Error:", err.message);
     res.status(500).json({ msg: err.message });
   }
 };

@@ -18,7 +18,7 @@ export default function Signup() {
     e.preventDefault();
     const res = await signupUser(form);
 
-    if (res.msg === "User created successfully") {
+    if (res.success) {
       alert(res.msg);
       await loadUser();
       navigate("/");

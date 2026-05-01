@@ -35,7 +35,7 @@ export default function SavedJobs() {
 
       {/* HEADER */}
       <h1 className="text-3xl font-bold mb-6 text-gray-800">
-        ⭐ Saved Jobs
+        Saved Jobs
       </h1>
 
       {/* EMPTY STATE */}

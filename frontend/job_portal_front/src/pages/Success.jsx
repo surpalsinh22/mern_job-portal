@@ -23,7 +23,7 @@ export default function Success() {
         </h1>
 
         <p className="text-gray-500 mt-2">
-          Redirecting to home in 3 seconds...
+          Redirecting to home
         </p>
 
       </div>

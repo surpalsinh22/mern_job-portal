@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { FaBriefcase, FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 export default function Footer() {
@@ -26,10 +27,31 @@ export default function Footer() {
           <h3 className="text-white font-semibold mb-3">Quick Links</h3>
 
           <ul className="space-y-2 text-sm">
-            <li className="hover:text-emerald-400 cursor-pointer">Home</li>
-            <li className="hover:text-emerald-400 cursor-pointer">Jobs</li>
-            <li className="hover:text-emerald-400 cursor-pointer">Saved Jobs</li>
-            <li className="hover:text-emerald-400 cursor-pointer">Applied Jobs</li>
+
+            <li>
+              <Link to="/" className="hover:text-emerald-400">
+                Home
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/" className="hover:text-emerald-400">
+                Jobs
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/saved-jobs" className="hover:text-emerald-400">
+                Saved Jobs
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/applied-jobs" className="hover:text-emerald-400">
+                Applied Jobs
+              </Link>
+            </li>
+
           </ul>
         </div>
 
@@ -62,7 +84,6 @@ export default function Footer() {
         </div>
 
       </div>
-
 
     </footer>
   );

@@ -1,14 +1,17 @@
 import { useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
+import { API_BASE_URL } from "../api/config"
 
-const BASE_URL = "http://localhost:5000/api/applications";
+
+const BASE_URL = `${API_BASE_URL}/api/applications`;
 
 export default function ApplyJob() {
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-
+const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const [form, setForm] = useState({
@@ -36,12 +39,14 @@ export default function ApplyJob() {
 
   const submit = async (e) => {
     e.preventDefault();
+    console.log("🔥 SUBMIT CLICKED");
 
     const err = validate();
     if (err) {
       setError(err);
       return;
     }
+setLoading(true);
 
     const res = await fetch(`${BASE_URL}/apply`, {
       method: "POST",
@@ -52,15 +57,15 @@ export default function ApplyJob() {
         jobId: id
       })
     });
+    setLoading(false);
 
     const data = await res.json();
-
-    if (res.ok) {
-      navigate("/success");
-    } else {
-      setError(data.msg || "Something went wrong");
-    }
-  };
+if (res.ok) {
+  toast.success("Application submitted ✅");
+  navigate("/success");
+} else {
+  toast.error(data.msg || "Something went wrong");
+}}
 
   return (
     <div className="min-h-screen flex items-center justify-center 

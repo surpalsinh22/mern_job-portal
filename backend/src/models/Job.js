@@ -9,7 +9,7 @@ const jobSchema = new mongoose.Schema(
   location: { type: String, required: true },
   address: String,
 
-  // ✅ SIMPLE SALARY SYSTEM
+  // SIMPLE SALARY SYSTEM
   salary: String,
   salaryRange: String,
   posted: String,
