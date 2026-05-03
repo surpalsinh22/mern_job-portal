@@ -41,13 +41,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 // 🔥 FIXED CORS (PRODUCTION READY)
-app.use(
-  cors({
-    origin: "https://mern-job-portal-xi.vercel.app",
-    credentials: true,
-  })
-);
-
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);

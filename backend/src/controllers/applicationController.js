@@ -1,5 +1,4 @@
 const Application = require("../models/Application");
-const sendEmail = require("../utils/sendEmail");
 
 // APPLY JOB (USER)
 exports.applyJob = async (req, res) => {
@@ -30,21 +29,6 @@ exports.applyJob = async (req, res) => {
       resume,
       status: "pending"
     });
-
-    // 🔥 SEND EMAIL (apply)
-    await sendEmail(
-      email,
-      "Job Application Submitted",
-      `Hello ${fullName},
-
-You have successfully applied for this job.
-
-Status: Pending
-
-We will notify you once your application is reviewed.
-
-- Team`
-    );
 
     res.status(201).json({
       msg: "Applied successfully",
@@ -106,19 +90,6 @@ exports.updateStatus = async (req, res) => {
     if (!app) {
       return res.status(404).json({ msg: "Application not found" });
     }
-
-    // 🔥 SEND EMAIL (status update)
-    await sendEmail(
-      app.email,
-      "Application Status Update",
-      `Hello ${app.fullName},
-
-Your application status has been updated.
-
-New Status: ${status.toUpperCase()}
-
-- Team`
-    );
 
     res.json({
       msg: "Status updated",
