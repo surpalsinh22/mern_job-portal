@@ -3,10 +3,12 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
 
+const isProd = process.env.NODE_ENV === "production";
+
 const cookieOptions = {
   httpOnly: true,
-  secure: true,        // REQUIRED for Render (HTTPS)
-  sameSite: "none",    // REQUIRED for Vercel + Render
+  secure: isProd,                 // localhost → false
+  sameSite: isProd ? "None" : "Lax",
   path: "/"
 };
 
