@@ -12,12 +12,11 @@
 // app.use(express.json());
 // app.use(cookieParser());
 
-// // CORS FIX
+// // 🔥 FIXED CORS (PRODUCTION READY)
 // app.use(cors({
-//   origin: "https://mern-job-portal-xi.vercel.app",
+//   origin: true,
 //   credentials: true
 // }));
-
 // // routes
 // app.use("/api/auth", authRoutes);
 // app.use("/api/jobs", jobRoutes);
@@ -25,7 +24,6 @@
 // app.use("/api/saved", savedJobRoutes);
 
 // module.exports = app;
-
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -40,12 +38,11 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-// 🔥 FIXED CORS (PRODUCTION READY)
 app.use(cors({
   origin: true,
   credentials: true
 }));
-// routes
+
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
