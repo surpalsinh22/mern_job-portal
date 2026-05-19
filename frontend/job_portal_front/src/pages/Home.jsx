@@ -13,22 +13,32 @@ export default function Home() {
 
   const [currentPage, setCurrentPage] = useState(1);
   const jobsPerPage = 10;
+  
+useEffect(() => {
+  const cached = localStorage.getItem("jobs");
 
- useEffect(() => {
+  if (cached) {
+    setJobs(JSON.parse(cached));
+    setLoading(false);
+  }
+
   fetchJobs();
 }, []);
 
 const fetchJobs = async () => {
-  setLoading(true);   
-
   try {
+    setLoading(true);
+
     const data = await getJobs();
+
     setJobs(data);
+
+    localStorage.setItem("jobs", JSON.stringify(data));
   } catch (err) {
     console.log("Error fetching jobs:", err);
+  } finally {
+    setLoading(false);
   }
-
-  setLoading(false);   
 };
   useEffect(() => {
     setCurrentPage(1);
@@ -76,7 +86,9 @@ const fetchJobs = async () => {
     "Data Science",
     "Data Analytics",
   ];
-
+ if (loading && jobs.length === 0) {
+  return <h2>Loading jobs...</h2>;
+}
   return (
     <div className="min-h-screen bg-gray-100">
 
