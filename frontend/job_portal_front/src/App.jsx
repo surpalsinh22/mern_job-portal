@@ -16,12 +16,11 @@ import Footer from "./components/Footer";
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-gray-50">
-
+<div className="min-h-screen flex flex-col bg-gray-50">
         {/* NAVBAR*/}
         <Navbar />
         <Toaster />
-
+<main className="flex-1">
         {/* ROUTES */}
         <Routes>
 
@@ -44,6 +43,7 @@ export default function App() {
           <Route path="/saved-jobs" element={<SavedJobs />} />
 
         </Routes>
+        </main>
         <Footer/>
 
       </div>

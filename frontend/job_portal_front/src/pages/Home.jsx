@@ -192,40 +192,53 @@ const fetchJobs = async () => {
       </div>
 
       {/* SEARCH (UNCHANGED) */}
-      <div className="max-w-5xl mx-auto px-4 mt-8">
-        <div className="bg-white border shadow-md rounded-2xl p-5 flex gap-3">
+   <div className="max-w-5xl mx-auto px-4 mt-8">
+  <div className="bg-white border shadow-md rounded-2xl p-4 flex flex-col sm:flex-row gap-3">
 
-          <input
-            value={tempSearch}
-            onChange={(e) => setTempSearch(e.target.value)}
-            className="flex-1 px-4 py-3 border rounded-xl"
-            placeholder="Search jobs..."
-          />
+    <input
+      value={tempSearch}
+      onChange={(e) => setTempSearch(e.target.value)}
+      className="w-full flex-1 px-4 py-3 border rounded-xl outline-none focus:ring-2 focus:ring-black"
+      placeholder="Search jobs..."
+    />
 
-          <button
-            onClick={() => setSearch(tempSearch)}
-            className="px-6 py-3 bg-black text-white rounded-xl"
-          >
-            Search
-          </button>
+    <button
+      onClick={() => setSearch(tempSearch)}
+      className="w-full sm:w-auto px-6 py-3 bg-black text-white rounded-xl hover:bg-gray-900 transition-all duration-300"
+    >
+      Search
+    </button>
 
-        </div>
-      </div>
+  </div>
+</div>
 
       {/* CATEGORY + ALL JOBS BUTTON */}
-      <div className="max-w-6xl mx-auto px-4 mt-8 flex flex-wrap gap-3 justify-center">
-        {categories.map((cat, i) => (
-          <button
-            key={i}
-            onClick={() => setFilter(cat)}
-            className={`px-4 py-2 rounded-full border ${
-              filter === cat ? "bg-black text-white" : "bg-white"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
+     <div className="max-w-6xl mx-auto px-4 mt-8">
+  <div className="flex flex-wrap justify-center gap-3">
+
+    {categories.map((cat, i) => (
+      <button
+        key={i}
+        onClick={() => setFilter(cat)}
+        className={`
+          px-5 py-2.5 rounded-full
+          text-sm sm:text-base font-medium
+          transition-all duration-300
+          border
+          
+          ${
+            filter === cat
+              ? "bg-black text-white border-black shadow-md scale-105"
+              : "bg-white text-gray-700 border-gray-300 hover:bg-black hover:text-white hover:border-black hover:scale-105"
+          }
+        `}
+      >
+        {cat}
+      </button>
+    ))}
+
+  </div>
+</div>
 
       {/* JOBS */}
       <div className="max-w-6xl mx-auto px-4 py-6 grid gap-5">
@@ -254,8 +267,3 @@ const fetchJobs = async () => {
     </div>
   );
 }
-
-
-
-
-
