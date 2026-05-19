@@ -1,4 +1,3 @@
-// src/controllers/authController.js
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
@@ -112,7 +111,7 @@ exports.getMe = async (req, res) => {
       user
     });
   } catch (err) {
-    console.log("ERROR:", err.message); // 👈 add
+    console.log("ERROR:", err.message); 
     res.status(500).json({ msg: err.message });
   }
 };
