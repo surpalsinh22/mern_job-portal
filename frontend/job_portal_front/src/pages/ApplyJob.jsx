@@ -45,17 +45,10 @@ export default function ApplyJob() {
     }
 
     try {
-      const res = await fetch(`${BASE_URL}/apply`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          ...form,
-          jobId: id
-        })
-      });
-
-      const data = await res.json();
+      const data = await applyJobApi({
+      ...form,
+      jobId: id
+    });
 
       if (res.ok) {
         navigate("/success");

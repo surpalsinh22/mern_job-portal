@@ -9,23 +9,6 @@ export default function Login() {
   const navigate = useNavigate();
   const { loadUser } = useContext(AuthContext);
 
-  // const handleSubmit = async (e) => {
-  // e.preventDefault();
-
-  // const res = await loginUser(form);
-
-//   if (res.msg === "Login successful") {
-//     alert(res.msg);
-
-//     setTimeout(async () => {
-//       await loadUser();   
-//       navigate("/");
-//     }, 100);
-
-//   } else {
-//     alert(res.msg);
-//   }
-// };
 const handleSubmit = async (e) => {
   e.preventDefault();
 
