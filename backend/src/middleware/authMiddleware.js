@@ -2,7 +2,7 @@
 const jwt = require("jsonwebtoken");
 
 const protect = (req, res, next) => {
-  console.log("COOKIE:", req.cookies); // 🔥 ADD THIS
+  console.log("COOKIE:", req.cookies); 
 
   const token = req.cookies.token;
 

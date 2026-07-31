@@ -14,7 +14,9 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: [
-    "https://mern-job-portal-xi.vercel.app"
+    "https://mern-job-portal-xi.vercel.app",
+    "https://mern-job-portal-git-main-surpalsinhramlavat-gmailcoms-projects.vercel.app",
+    "https://mern-job-portal-2xek48rns-surpalsinhramlavat-gmailcoms-projects.vercel.app"
   ],
   credentials: true
 }));

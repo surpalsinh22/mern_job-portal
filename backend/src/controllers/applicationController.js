@@ -88,6 +88,7 @@ exports.updateStatus = async (req, res) => {
     );
 
     if (!app) {
+      
       return res.status(404).json({ msg: "Application not found" });
     }
 
