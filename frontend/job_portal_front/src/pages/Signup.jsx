@@ -96,7 +96,6 @@
 //     </div>
 //   );
 // }
-
 import { useState, useContext } from "react";
 import { signupUser } from "../api/auth";
 import { useNavigate, Link } from "react-router-dom";
@@ -116,26 +115,21 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // NAME VALIDATION
     if (!form.name.trim()) {
       alert("Name is required");
       return;
     }
 
-    // EMAIL VALIDATION
     if (!form.email.trim()) {
       alert("Email is required");
       return;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(form.email)) {
+    if (!form.email.includes("@")) {
       alert("Please enter a valid email");
       return;
     }
 
-    // PASSWORD VALIDATION
     if (!form.password.trim()) {
       alert("Password is required");
       return;
@@ -226,4 +220,3 @@ export default function Signup() {
     </div>
   );
 }
-
